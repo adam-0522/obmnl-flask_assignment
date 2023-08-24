@@ -70,6 +70,14 @@ def search_transactions():
         return render_template("transactions.html", transactions = filtered_transactions)
     return render_template("search.html")
 
+# Calculate balance
+@app.route("/balance")
+def total_balance():
+    balance = 0
+    for transaction in transactions:
+        balance += transaction['amount']
+    return {"message": f"Total balance:{balance}"}
+
 # Run the Flask app
 if __name__ == "__main__":
     app.run(debug = True)
